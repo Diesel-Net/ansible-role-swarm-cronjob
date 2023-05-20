@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  {{ docker_service }}:
+    image: crazymax/swarm-cronjob
+    volumes:
+      - "{{ docker_socket }}:/var/run/docker.sock"
+    environment:
+      - "TZ={{ timezone }}"
+      - "LOG_LEVEL=INFO"
+      - "LOG_JSON=false"
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
