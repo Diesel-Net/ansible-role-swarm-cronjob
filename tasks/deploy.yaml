@@ -1,10 +1,5 @@
 - include_role:
     name: docker
-    tasks_from: stack_teardown
-  when: clean_install
-
-- include_role:
-    name: docker
     tasks_from: stack_deploy
 
 - include_role:
@@ -12,4 +7,3 @@
     tasks_from: service_update
   vars:
     options: --force
-  when: not clean_install
