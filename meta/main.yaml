@@ -1,0 +1,29 @@
+galaxy_info:
+  author: Thomas Daley
+  description: Installs swarm-cronjob persistent cron service for running jobs via docker labels
+  
+  min_ansible_vesion: 2.14
+  platforms:
+    - name: Ubuntu
+      versions:
+        - 18.04
+        - 20.04
+
+  galaxy_tags:
+    - ubuntu
+    - docker
+    - cron
+    - cronjob
+    - swarm-cronjob
+
+  dependencies:
+
+    - name: application
+      scm: git
+      src: "git@github.com:Diesel-Net/ansible-role-application.git"
+      version: 2.1.0
+
+    - name: docker
+      scm: git
+      src: "git@github.com:Diesel-Net/ansible-role-docker.git"
+      version: 2.0.3
