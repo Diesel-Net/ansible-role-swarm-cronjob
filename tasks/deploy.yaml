@@ -1,9 +1,14 @@
 - include_role:
     name: docker
     tasks_from: stack_deploy
+  vars:
+    app_name: swarm-cronjob
 
 - include_role:
     name: docker
     tasks_from: service_update
   vars:
     options: --force
+    docker_service: daemon
+    app_name: swarm-cronjob
+
