@@ -18,7 +18,7 @@ steps:
       - (cd swarm-cronjob && git checkout $(cat ../VERSION))
 
   - name: modify docker api version string in source
-    image: docker:bash
+    image: bash
     commands:
       # replace docker API version in source code
       - cd swarm-cronjob/internal/docker
