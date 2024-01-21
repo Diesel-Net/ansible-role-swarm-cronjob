@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   daemon:
-    image: crazymax/swarm-cronjob
+    image: docker.nexus.diesel.net/swarm-cronjob
     volumes:
       - "{{ docker_socket }}:/var/run/docker.sock"
     environment:
