@@ -27,6 +27,7 @@ steps:
   - name: docker build (${DRONE_BRANCH}-latest)
     image: plugins/docker
     settings:
+      context: swarm-cronjob
       mirror: dockerhub.nexus.diesel.net
       registry: docker.nexus.diesel.net
       username: 
@@ -43,6 +44,7 @@ steps:
   - name: docker build (${DRONE_TAG})
     image: plugins/docker
     settings:
+      context: swarm-cronjob
       mirror: dockerhub.nexus.diesel.net
       registry: docker.nexus.diesel.net
       username: 
