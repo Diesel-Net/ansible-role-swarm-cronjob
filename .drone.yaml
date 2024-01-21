@@ -1,0 +1,67 @@
+---
+kind: pipeline
+type: docker
+name: Build swarm-cronjob image
+
+concurrency:
+  limit: 1
+
+clone:
+  depth: 1
+
+steps:
+
+  - name: git clone upstream repo\
+    image: docker:git
+    commands:
+      - git clone --recursive https://github.com/crazy-max/swarm-cronjob.git swarm-cronjob
+      - (cd swarm-cronjob && git checkout $(cat ../VERSION))
+
+  - name: modify docker api version string in source
+    image: docker:bash
+    commands:
+      # replace docker API version in source code
+      - cd swarm-cronjob/internal/docker
+      - sed -i 's/WithVersion("1.12")/WithVersion("1.24")/g' client.go 
+
+  - name: docker build (${DRONE_BRANCH}-latest)
+    image: plugins/docker
+    settings:
+      mirror: dockerhub.nexus.diesel.net
+      registry: docker.nexus.diesel.net
+      username: 
+        from_secret: nexus_user
+      password:
+        from_secret: nexus_pass
+      repo: docker.nexus.diesel.net/swarm-cronjob
+      tags:
+        - ${DRONE_BRANCH}-latest
+    when:
+      event:
+        - push
+
+  - name: docker build (${DRONE_TAG})
+    image: plugins/docker
+    settings:
+      mirror: dockerhub.nexus.diesel.net
+      registry: docker.nexus.diesel.net
+      username: 
+        from_secret: nexus_user
+      password:
+        from_secret: nexus_pass
+      repo: docker.nexus.diesel.net/swarm-cronjob
+      tags:
+        - latest
+        - ${DRONE_TAG}
+    when:
+      event:
+        - tag
+
+trigger:
+  branch:
+    - development
+    - stable
+  event:
+    - push
+    - tag
+...
