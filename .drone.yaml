@@ -23,7 +23,7 @@ steps:
       # replace docker API version in source code
       - cd swarm-cronjob/internal/docker
       - sed -i 's/WithVersion("1.12")/WithVersion("1.24")/g' client.go
-      - cat client.go
+      - grep -h 'WithVersion' client.go
 
   - name: docker build (${DRONE_BRANCH}-latest)
     image: plugins/docker
