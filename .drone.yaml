@@ -28,6 +28,7 @@ steps:
     image: plugins/docker
     settings:
       context: swarm-cronjob
+      dockerfile: swarm-cronjob/Dockerfile
       mirror: dockerhub.nexus.diesel.net
       registry: docker.nexus.diesel.net
       username: 
@@ -45,6 +46,7 @@ steps:
     image: plugins/docker
     settings:
       context: swarm-cronjob
+      dockerfile: swarm-cronjob/Dockerfile
       mirror: dockerhub.nexus.diesel.net
       registry: docker.nexus.diesel.net
       username: 
