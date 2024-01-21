@@ -11,7 +11,7 @@ clone:
 
 steps:
 
-  - name: git clone upstream repo\
+  - name: git clone upstream repo
     image: docker:git
     commands:
       - git clone --recursive https://github.com/crazy-max/swarm-cronjob.git swarm-cronjob
